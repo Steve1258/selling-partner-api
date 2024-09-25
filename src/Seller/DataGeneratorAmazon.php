@@ -1,13 +1,15 @@
 <?php 
 namespace SellingPartnerApi\Seller;
 
+use Illuminate\Support\Facades\Log;
+
 class DataGeneratorAmazon
 {
-    private static $API_URL;
+    private $API_URL;
     
     public function __construct()
     {
-        $this->API_URL = "http://localhost:521"; // Recupera l'URL dell'API esterna dall'ambiente
+        $this->API_URL = "http://192.168.1.118:521/api"; // Recupera l'URL dell'API esterna dall'ambiente
     }
     
     /**
@@ -20,15 +22,20 @@ class DataGeneratorAmazon
      */
     public function callVatCalculationApi($page)
     {
-        $client = new \GuzzleHttp\Client(); // Crea un'istanza del client HTTP Guzzle
-        $apiUrl = $this->API_URL . '/vat-calculation'; // Recupera l'URL dell'API esterna dall'ambiente
-
-        // Esegui la chiamata API e restituisci la risposta
-        return $client->post($apiUrl, [
-            'form_params' => [
-                'page' => $page,    // Parametro della pagina da richiedere
-            ]
-        ]);
+        try{
+            $client = new \GuzzleHttp\Client(); // Crea un'istanza del client HTTP Guzzle
+            $apiUrl = $this->API_URL . '/vat-calculation'; // Recupera l'URL dell'API esterna dall'ambiente
+            // Esegui la chiamata API e restituisci la risposta
+            return $client->post($apiUrl, [
+                'form_params' => [
+                    'page' => $page,
+                    'key' => 'dJQn4>501<#R'
+                ]
+            ]);
+        }
+        catch(\Exception $e){
+            Log::info('Error: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -44,15 +51,21 @@ class DataGeneratorAmazon
      */
     public function callFlatfileVatInvoiceDataApi($page)
     {
-        $client = new \GuzzleHttp\Client(); // Crea un'istanza del client HTTP Guzzle
-        $apiUrl = $this->API_URL . '/flatfile-vat-invoice-data'; // Recupera l'URL dell'API esterna dall'ambiente
-
-        // Esegui la chiamata API e restituisci la risposta
-        return $client->post($apiUrl, [
-            'form_params' => [
-                'page' => $page,    // Parametro della pagina da richiedere
-            ]
-        ]);
+        try{
+            $client = new \GuzzleHttp\Client(); // Crea un'istanza del client HTTP Guzzle
+            $apiUrl = $this->API_URL . '/flatfile-vat-invoice-data'; // Recupera l'URL dell'API esterna dall'ambiente
+            Log::info('API URL: ' . $apiUrl);
+            // Esegui la chiamata API e restituisci la risposta
+            return $client->post($apiUrl, [
+                'form_params' => [
+                    'page' => $page,
+                    'key' => 'dJQn4>501<#R'
+                ]
+            ]);
+        }
+        catch(\Exception $e){
+            Log::info('Error: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -68,14 +81,20 @@ class DataGeneratorAmazon
      */
     public function callCollectionsDataApi($page)
     {
-        $client = new \GuzzleHttp\Client(); // Crea un'istanza del client HTTP Guzzle
-        $apiUrl = $this->API_URL . '/collections-data'; // Recupera l'URL dell'API esterna dall'ambiente
+        try{
+            $client = new \GuzzleHttp\Client(); // Crea un'istanza del client HTTP Guzzle
+            $apiUrl = $this->API_URL . '/collections-data'; // Recupera l'URL dell'API esterna dall'ambiente
 
-        // Esegui la chiamata API e restituisci la risposta
-        return $client->post($apiUrl, [
-            'form_params' => [
-                'page' => $page,    // Parametro della pagina da richiedere
-            ]
-        ]);
+            // Esegui la chiamata API e restituisci la risposta
+            return $client->post($apiUrl, [
+                'form_params' => [
+                    'page' => $page,    
+                    'key' => 'dJQn4>501<#R'
+                ]
+            ]);
+        }
+        catch(\Exception $e){
+            Log::info('Error: ' . $e->getMessage());
+        }
     }
 }
