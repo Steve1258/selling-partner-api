@@ -3,12 +3,13 @@ namespace SellingPartnerApi\Seller;
 
 class DataGeneratorAmazon
 {
-    private $API_URL;
+    private static $API_URL;
     
     public function __construct()
     {
         $this->API_URL = "http://localhost:521"; // Recupera l'URL dell'API esterna dall'ambiente
     }
+    
     /**
      * callVatCalculationApi
      *
@@ -17,7 +18,7 @@ class DataGeneratorAmazon
      * @return \Psr\Http\Message\ResponseInterface
      * Restituisce la risposta dell'API.
      */
-    private function callVatCalculationApi($page)
+    public function callVatCalculationApi($page)
     {
         $client = new \GuzzleHttp\Client(); // Crea un'istanza del client HTTP Guzzle
         $apiUrl = $this->API_URL . '/vat-calculation'; // Recupera l'URL dell'API esterna dall'ambiente
@@ -41,7 +42,7 @@ class DataGeneratorAmazon
      * @return \Psr\Http\Message\ResponseInterface
      * Restituisce la risposta dell'API.
      */
-    private function callFlatfileVatInvoiceDataApi($page)
+    public function callFlatfileVatInvoiceDataApi($page)
     {
         $client = new \GuzzleHttp\Client(); // Crea un'istanza del client HTTP Guzzle
         $apiUrl = $this->API_URL . '/flatfile-vat-invoice-data'; // Recupera l'URL dell'API esterna dall'ambiente
@@ -65,7 +66,7 @@ class DataGeneratorAmazon
      * @return \Psr\Http\Message\ResponseInterface
      * Restituisce la risposta dell'API.
      */
-    private function callCollectionsDataApi($page)
+    public function callCollectionsDataApi($page)
     {
         $client = new \GuzzleHttp\Client(); // Crea un'istanza del client HTTP Guzzle
         $apiUrl = $this->API_URL . '/collections-data'; // Recupera l'URL dell'API esterna dall'ambiente
