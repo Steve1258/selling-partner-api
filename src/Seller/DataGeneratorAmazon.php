@@ -9,7 +9,7 @@ class DataGeneratorAmazon
     
     public function __construct()
     {
-        $this->API_URL = "http://192.168.1.118:521/api"
+        $this->API_URL = "http://192.168.1.118:521/api";
     }
     
     /**
@@ -67,10 +67,9 @@ class DataGeneratorAmazon
     /**
      * callCollectionsDataApi
      *
-     * @param int $page Il numero della pagina da richiedere all'API.
+     * @param int $page
      *
      * @return \Psr\Http\Message\ResponseInterface
-     * Restituisce la risposta dell'API.
      */
     public function callCollectionsDataApi($page)
     {
